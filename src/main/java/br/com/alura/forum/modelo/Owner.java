@@ -34,7 +34,12 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
 
+import br.com.alura.forum.controller.JacksonCustomOwnerDeserializer;
+import br.com.alura.forum.controller.JacksonCustomOwnerSerializer;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -46,6 +51,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "owners")
+@JsonSerialize(using = JacksonCustomOwnerSerializer.class)
+@JsonDeserialize(using = JacksonCustomOwnerDeserializer.class)
 public class Owner extends Person {
     @Column(name = "address")
     @NotEmpty

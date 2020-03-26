@@ -37,7 +37,12 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.alura.forum.controller.JacksonCustomPetDeserializer;
+import br.com.alura.forum.controller.JacksonCustomPetSerializer;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Simple business object representing a pet.
@@ -48,6 +53,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "pets")
+@JsonSerialize(using = JacksonCustomPetSerializer.class)
+@JsonDeserialize(using = JacksonCustomPetDeserializer.class)
 public class Pet extends NamedEntity {
 
     @Column(name = "birth_date")

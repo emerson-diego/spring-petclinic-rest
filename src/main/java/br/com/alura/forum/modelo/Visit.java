@@ -28,7 +28,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.alura.forum.controller.JacksonCustomVisitDeserializer;
+import br.com.alura.forum.controller.JacksonCustomVisitSerializer;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Simple JavaBean domain object representing a visit.
@@ -37,6 +42,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 @Table(name = "visits")
+@JsonSerialize(using = JacksonCustomVisitSerializer.class)
+@JsonDeserialize(using = JacksonCustomVisitDeserializer.class)
 public class Visit extends BaseEntity {
 
     /**
