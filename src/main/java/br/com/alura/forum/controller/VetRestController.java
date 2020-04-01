@@ -26,7 +26,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +47,7 @@ import br.com.alura.forum.service.ClinicService;
  */
 
 @RestController
-//@CrossOrigin(exposedHeaders = "errors, content-type,Authorization")
+// @CrossOrigin(exposedHeaders = "errors, content-type,Authorization")
 @RequestMapping("api/vets")
 public class VetRestController {
 
@@ -55,6 +55,7 @@ public class VetRestController {
     private ClinicService clinicService;
 
     // @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_admin')")
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<Vet>> getAllVets() {
         Collection<Vet> vets = new ArrayList<Vet>();
