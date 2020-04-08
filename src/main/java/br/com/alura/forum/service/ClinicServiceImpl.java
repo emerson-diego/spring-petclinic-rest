@@ -51,264 +51,264 @@ import br.com.alura.forum.repository.VisitRepository;
 
 public class ClinicServiceImpl implements ClinicService {
 
-	private PetRepository petRepository;
-	private VetRepository vetRepository;
-	private OwnerRepository ownerRepository;
-	private VisitRepository visitRepository;
-	private SpecialtyRepository specialtyRepository;
-	private PetTypeRepository petTypeRepository;
+    private PetRepository petRepository;
+    private VetRepository vetRepository;
+    private OwnerRepository ownerRepository;
+    private VisitRepository visitRepository;
+    private SpecialtyRepository specialtyRepository;
+    private PetTypeRepository petTypeRepository;
 
-	@Autowired
-	public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository,
-			VisitRepository visitRepository, SpecialtyRepository specialtyRepository,
-			PetTypeRepository petTypeRepository) {
-		this.petRepository = petRepository;
-		this.vetRepository = vetRepository;
-		this.ownerRepository = ownerRepository;
-		this.visitRepository = visitRepository;
-		this.specialtyRepository = specialtyRepository;
-		this.petTypeRepository = petTypeRepository;
-	}
+    @Autowired
+    public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository,
+            VisitRepository visitRepository, SpecialtyRepository specialtyRepository,
+            PetTypeRepository petTypeRepository) {
+        this.petRepository = petRepository;
+        this.vetRepository = vetRepository;
+        this.ownerRepository = ownerRepository;
+        this.visitRepository = visitRepository;
+        this.specialtyRepository = specialtyRepository;
+        this.petTypeRepository = petTypeRepository;
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<Pet> findAllPets() throws DataAccessException {
-		return petRepository.findAll();
-		// return null;
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<Pet> findAllPets() throws DataAccessException {
+        return petRepository.findAll();
+        // return null;
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deletePet(Pet pet) throws DataAccessException {
-		petRepository.delete(pet);
-	}
+    @Transactional
+    public void deletePet(Pet pet) throws DataAccessException {
+        petRepository.delete(pet);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Visit findVisitById(long visitId) throws DataAccessException {
-		Visit visit = null;
-		try {
-			visit = visitRepository.findById(visitId);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization return null;
-		}
-		return visit;
-	}
+    @Transactional(readOnly = true)
+    public Visit findVisitById(long visitId) throws DataAccessException {
+        Visit visit = null;
+        try {
+            visit = visitRepository.findById(visitId);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization return null;
+        }
+        return visit;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Visit> findAllVisits() throws DataAccessException {
-		return visitRepository.findAll();
-	}
+    @Transactional(readOnly = true)
+    public Collection<Visit> findAllVisits() throws DataAccessException {
+        return visitRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deleteVisit(Visit visit) throws DataAccessException {
-		visitRepository.delete(visit);
-	}
+    @Transactional
+    public void deleteVisit(Visit visit) throws DataAccessException {
+        visitRepository.delete(visit);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Vet findVetById(long id) throws DataAccessException {
-		Vet vet = null;
-		try {
-			vet = vetRepository.findById(id);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization return null;
-		}
-		return vet;
-	}
+    @Transactional(readOnly = true)
+    public Vet findVetById(long id) throws DataAccessException {
+        Vet vet = null;
+        try {
+            vet = vetRepository.findById(id);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization return null;
+        }
+        return vet;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Vet> findAllVets() throws DataAccessException {
-		return vetRepository.findAll();
-	}
+    @Transactional(readOnly = true)
+    public Collection<Vet> findAllVets() throws DataAccessException {
+        return vetRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void saveVet(Vet vet) throws DataAccessException {
-		vetRepository.save(vet);
-	}
+    @Transactional
+    public void saveVet(Vet vet) throws DataAccessException {
+        vetRepository.save(vet);
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deleteVet(Vet vet) throws DataAccessException {
-		vetRepository.delete(vet);
-	}
+    @Transactional
+    public void deleteVet(Vet vet) throws DataAccessException {
+        vetRepository.delete(vet);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Owner> findAllOwners() throws DataAccessException {
-		return ownerRepository.findAll();
-	}
+    @Transactional(readOnly = true)
+    public Collection<Owner> findAllOwners() throws DataAccessException {
+        return ownerRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deleteOwner(Owner owner) throws DataAccessException {
-		ownerRepository.delete(owner);
-	}
+    @Transactional
+    public void deleteOwner(Owner owner) throws DataAccessException {
+        ownerRepository.delete(owner);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public PetType findPetTypeById(long petTypeId) {
-		PetType petType = null;
-		try {
-			petType = petTypeRepository.findById(petTypeId);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization return null;
-		}
-		return petType;
-	}
+    @Transactional(readOnly = true)
+    public PetType findPetTypeById(long petTypeId) {
+        PetType petType = null;
+        try {
+            petType = petTypeRepository.findById(petTypeId);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization return null;
+        }
+        return petType;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<PetType> findAllPetTypes() throws DataAccessException {
-		return petTypeRepository.findAll();
-	}
+    @Transactional(readOnly = true)
+    public Collection<PetType> findAllPetTypes() throws DataAccessException {
+        return petTypeRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void savePetType(PetType petType) throws DataAccessException {
-		petTypeRepository.save(petType);
-	}
+    @Transactional
+    public void savePetType(PetType petType) throws DataAccessException {
+        petTypeRepository.save(petType);
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deletePetType(PetType petType) throws DataAccessException {
-		petTypeRepository.delete(petType);
-	}
+    @Transactional
+    public void deletePetType(PetType petType) throws DataAccessException {
+        petTypeRepository.delete(petType);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Specialty findSpecialtyById(long specialtyId) {
-		Specialty specialty = null;
-		try {
-			specialty = specialtyRepository.findById(specialtyId);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization return null;
-		}
-		return specialty;
-	}
+    @Transactional(readOnly = true)
+    public Specialty findSpecialtyById(long specialtyId) {
+        Specialty specialty = null;
+        try {
+            specialty = specialtyRepository.findById(specialtyId);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization return null;
+        }
+        return specialty;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Specialty> findAllSpecialties() throws DataAccessException {
-		return specialtyRepository.findAll();
-	}
+    @Transactional(readOnly = true)
+    public Collection<Specialty> findAllSpecialties() throws DataAccessException {
+        return specialtyRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void saveSpecialty(Specialty specialty) throws DataAccessException {
-		specialtyRepository.save(specialty);
-	}
+    @Transactional
+    public void saveSpecialty(Specialty specialty) throws DataAccessException {
+        specialtyRepository.save(specialty);
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void deleteSpecialty(Specialty specialty) throws DataAccessException {
-		specialtyRepository.delete(specialty);
-	}
+    @Transactional
+    public void deleteSpecialty(Specialty specialty) throws DataAccessException {
+        specialtyRepository.delete(specialty);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<PetType> findPetTypes() throws DataAccessException {
-		//
-		return petRepository.findPetTypes();
-		// return null;
-	}
+    @Transactional(readOnly = true)
+    public Collection<PetType> findPetTypes() throws DataAccessException {
+        //
+        return petRepository.findPetTypes();
+        // return null;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Owner findOwnerById(long id) throws DataAccessException {
-		Owner owner = null;
-		try {
-			owner = ownerRepository.findById(id);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization
-			return null;
-		}
-		return owner;
-	}
+    @Transactional(readOnly = true)
+    public Owner findOwnerById(long id) throws DataAccessException {
+        Owner owner = null;
+        try {
+            owner = ownerRepository.findById(id);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization
+            return null;
+        }
+        return owner;
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Pet findPetById(long id) throws DataAccessException {
-		Pet pet = null;
-		try { // pet =
-			petRepository.findById(id);
-		} catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
-			// just ignore not found exceptions for Jdbc/Jpa realization
-			return null;
-		}
-		return pet;
-	}
+    @Transactional(readOnly = true)
+    public Pet findPetById(long id) throws DataAccessException {
+        Pet pet = null;
+        try { //
+            pet = petRepository.findById(id);
+        } catch (ObjectRetrievalFailureException | EmptyResultDataAccessException e) {
+            // just ignore not found exceptions for Jdbc/Jpa realization
+            return null;
+        }
+        return pet;
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void savePet(Pet pet) throws DataAccessException { //
-		petRepository.save(pet);
+    @Transactional
+    public void savePet(Pet pet) throws DataAccessException { //
+        petRepository.save(pet);
 
-	}
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void saveVisit(Visit visit) throws DataAccessException {
-		visitRepository.save(visit);
+    @Transactional
+    public void saveVisit(Visit visit) throws DataAccessException {
+        visitRepository.save(visit);
 
-	}
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
 
-	@Cacheable(value = "vets")
-	public Collection<Vet> findVets() throws DataAccessException {
-		return vetRepository.findAll();
-	}
+    @Cacheable(value = "vets")
+    public Collection<Vet> findVets() throws DataAccessException {
+        return vetRepository.findAll();
+    }
 
-	@Override
+    @Override
 
-	@Transactional
-	public void saveOwner(Owner owner) throws DataAccessException {
-		ownerRepository.save(owner);
+    @Transactional
+    public void saveOwner(Owner owner) throws DataAccessException {
+        ownerRepository.save(owner);
 
-	}
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
-		return ownerRepository.findByLastName(lastName);
-	}
+    @Transactional(readOnly = true)
+    public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
+        return ownerRepository.findByLastName(lastName);
+    }
 
-	@Override
+    @Override
 
-	@Transactional(readOnly = true)
-	public Collection<Visit> findVisitsByPetId(long petId) {
-		return visitRepository.findByPetId(petId);
-	}
+    @Transactional(readOnly = true)
+    public Collection<Visit> findVisitsByPetId(long petId) {
+        return visitRepository.findByPetId(petId);
+    }
 
 }

@@ -37,6 +37,7 @@ import org.springframework.data.domain.Page;
 
 import br.com.alura.forum.controller.JacksonCustomOwnerDeserializer;
 import br.com.alura.forum.controller.JacksonCustomOwnerSerializer;
+import br.com.alura.forum.controller.JacksonCustomPetDeserializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -52,6 +53,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @Entity
 @Table(name = "owners")
+@JsonSerialize(using = JacksonCustomOwnerSerializer.class)
+@JsonDeserialize(using = JacksonCustomOwnerDeserializer.class)
 public class Owner extends Person {
     @Column(name = "address")
     @NotEmpty

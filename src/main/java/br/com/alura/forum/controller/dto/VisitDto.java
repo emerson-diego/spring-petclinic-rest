@@ -1,6 +1,8 @@
 package br.com.alura.forum.controller.dto;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import br.com.alura.forum.modelo.Visit;
 
@@ -51,6 +53,10 @@ public class VisitDto {
 
     public void setPet(Long pet) {
         this.pet = pet;
+    }
+
+    public static Collection<VisitDto> converter(Collection<Visit> visits) {
+        return visits.stream().map(VisitDto::new).collect(Collectors.toList());
     }
 
 }

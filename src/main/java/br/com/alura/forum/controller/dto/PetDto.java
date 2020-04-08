@@ -1,8 +1,10 @@
 package br.com.alura.forum.controller.dto;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import br.com.alura.forum.modelo.Pet;
 import br.com.alura.forum.modelo.Visit;
@@ -78,6 +80,10 @@ public class PetDto {
 
     public void setVisits(Set<VisitDto> visits) {
         this.visits = visits;
+    }
+
+    public static Collection<PetDto> converter(Collection<Pet> pets) {
+        return pets.stream().map(PetDto::new).collect(Collectors.toList());
     }
 
 }
