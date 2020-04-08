@@ -33,6 +33,7 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
+import org.springframework.data.domain.Page;
 
 import br.com.alura.forum.controller.JacksonCustomOwnerDeserializer;
 import br.com.alura.forum.controller.JacksonCustomOwnerSerializer;
@@ -51,8 +52,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @Entity
 @Table(name = "owners")
-@JsonSerialize(using = JacksonCustomOwnerSerializer.class)
-@JsonDeserialize(using = JacksonCustomOwnerDeserializer.class)
 public class Owner extends Person {
     @Column(name = "address")
     @NotEmpty
@@ -155,4 +154,5 @@ public class Owner extends Person {
                 .append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
                 .append("telephone", this.telephone).toString();
     }
+
 }
