@@ -49,7 +49,7 @@ public class JacksonCustomVisitDeserializer extends StdDeserializer<Visit> {
     @Override
     public Visit deserialize(JsonParser parser, DeserializationContext context)
             throws IOException, JsonProcessingException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Visit visit = new Visit();
         Pet pet = new Pet();
         ObjectMapper mapper = new ObjectMapper();

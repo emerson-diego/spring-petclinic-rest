@@ -65,7 +65,7 @@ public class PetRestController {
         return new ResponseEntity<Pet>(pet, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_usuario') or hasRole('ROLE_admin')")
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<Pet>> getPets() {
         Collection<Pet> pets = this.clinicService.findAllPets();
@@ -75,13 +75,13 @@ public class PetRestController {
         return new ResponseEntity<Collection<Pet>>(pets, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_usuario') or hasRole('ROLE_admin')")
     @RequestMapping(value = "/pettypes", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<PetType>> getPetTypes() {
         return new ResponseEntity<Collection<PetType>>(this.clinicService.findPetTypes(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_usuario') or hasRole('ROLE_admin')")
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<Pet> addPet(@RequestBody @Valid Pet pet, BindingResult bindingResult,
             UriComponentsBuilder ucBuilder) {
@@ -97,7 +97,7 @@ public class PetRestController {
         return new ResponseEntity<Pet>(pet, headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_usuario') or hasRole('ROLE_admin')")
     @RequestMapping(value = "/{petId}", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<Pet> updatePet(@PathVariable("petId") int petId, @RequestBody @Valid Pet pet,
             BindingResult bindingResult) {
@@ -120,7 +120,7 @@ public class PetRestController {
         return new ResponseEntity<Pet>(currentPet, HttpStatus.NO_CONTENT);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_usuario') or hasRole('ROLE_admin')")
     @RequestMapping(value = "/{petId}", method = RequestMethod.DELETE, produces = "application/json")
     @Transactional
     public ResponseEntity<Void> deletePet(@PathVariable("petId") int petId) {

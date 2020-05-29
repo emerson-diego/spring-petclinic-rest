@@ -46,7 +46,7 @@ public class JacksonCustomPetSerializer extends StdSerializer<Pet> {
 
     @Override
     public void serialize(Pet pet, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-        Format formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         jgen.writeStartObject(); // pet
         if (pet.getId() == null) {
             jgen.writeNullField("id");

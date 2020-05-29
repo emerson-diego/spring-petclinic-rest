@@ -49,7 +49,7 @@ public class JacksonCustomVisitSerializer extends StdSerializer<Visit> {
         if ((visit == null) || (visit.getPet() == null)) {
             throw new IOException("Cannot serialize Visit object - visit or visit.pet is null");
         }
-        Format formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         jgen.writeStartObject(); // visit
         if (visit.getId() == null) {
             jgen.writeNullField("id");
