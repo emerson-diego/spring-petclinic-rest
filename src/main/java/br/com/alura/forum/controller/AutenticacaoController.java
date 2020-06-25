@@ -20,24 +20,24 @@ import br.com.alura.forum.controller.form.LoginForm;
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
-	
-	@Autowired
-	private AuthenticationManager authManager;
-	
-	@Autowired
-	private TokenService tokenService;
 
-	@PostMapping
-	public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
-		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
-		
-		try {
-			Authentication authentication = authManager.authenticate(dadosLogin);
-			String token = tokenService.gerarToken(authentication);
-			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
-		} catch (AuthenticationException e) {
-			return ResponseEntity.badRequest().build();
-		}
-	}
-	
+    @Autowired
+    private AuthenticationManager authManager;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @PostMapping
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
+        UsernamePasswordAuthenticationToken dadosLogin = form.converter();
+
+        try {
+            Authentication authentication = authManager.authenticate(dadosLogin);
+            String token = tokenService.gerarToken(authentication);
+            return ResponseEntity.ok(new TokenDto(token, "Bearer"));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }
